@@ -11,6 +11,12 @@ services:
       MYSQL_DATABASE: pykt
     ports:
       - 3306:3306
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 2048M
+
     volumes:
       - ./data/mysql-data:/var/lib/mysql
 
@@ -25,11 +31,21 @@ services:
       - 5432:5432
     volumes:
       - ./data/postgres-data:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 2048M
 
   adminer:
     image: adminer
     restart: always
     environment:
       ADMINER_DESIGN: dracula
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 128M
     ports:
       - 8080:8080
