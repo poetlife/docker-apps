@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:5.7.41
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: pykt123
+      MYSQL_PASSWORD: pykt123
+      MYSQL_USER: pykt
+      MYSQL_DATABASE: pykt
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data/mysql-data:/var/lib/mysql
+
+  postgres:
+    image: postgres:15.2
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: pykt123
+      POSTGRES_USER: pykt
+      POSTGRES_DB: pykt
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data/postgres-data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    environment:
+      ADMINER_DESIGN: dracula
+    ports:
+      - 8080:8080
